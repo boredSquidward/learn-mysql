@@ -1,0 +1,7 @@
+.container > table,
+td,
+th {
+  border: 1px solid #000;
+  border-collapse: collapse;
+  padding: 2.5px 10px;
+}
