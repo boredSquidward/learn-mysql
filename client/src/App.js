@@ -31,7 +31,11 @@ function App() {
       e.target[9].checked && e.target[9].value,
     ];
 
-    const formData = { name, options, checkboxes };
+    const formData = {
+      name,
+      options: options.filter((item) => item !== false),
+      checkboxes: checkboxes.filter((item) => item !== false),
+    };
 
     const body = JSON.stringify(formData);
 

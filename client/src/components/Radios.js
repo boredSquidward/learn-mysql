@@ -5,15 +5,15 @@ import styles from "../styles/radios.module.css";
 function Radios() {
   return (
     <div className={styles.container}>
-      <lable for="taco">
+      <label for="taco">
         <input type="radio" name="options" value="taco" id="taco" required />
         taco
-      </lable>
-      <lable for="pizza">
+      </label>
+      <label for="pizza">
         <input type="radio" name="options" value="pizza" id="pizza" required />
         pizza
-      </lable>
-      <lable for="hotdog">
+      </label>
+      <label for="hotdog">
         <input
           type="radio"
           name="options"
@@ -22,21 +22,11 @@ function Radios() {
           required
         />
         hotdog
-      </lable>
-      <lable for="fries">
+      </label>
+      <label for="fries">
         <input type="radio" name="options" value="fries" id="fries" required />
         fries
-      </lable>
-      <lable for="chickens">
-        <input
-          type="radio"
-          name="options"
-          value="chickens"
-          id="chickens"
-          required
-        />
-        chickens
-      </lable>
+      </label>
     </div>
   );
 }
