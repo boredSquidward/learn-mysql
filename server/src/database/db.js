@@ -17,3 +17,21 @@ export const getPrices = async () => {
 
   return rows;
 };
+
+export const createOrder = async (
+  customersName,
+  foodOrders,
+  address,
+  date,
+  totalPrice
+) => {
+  const result = await pool.query("INSERT INTO orders VALUES (?,?,?,?,?)", [
+    customersName,
+    foodOrders,
+    address,
+    date,
+    totalPrice,
+  ]);
+
+  return result;
+};

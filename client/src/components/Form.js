@@ -5,42 +5,22 @@ import Name from "./Name";
 import Foods from "./Foods";
 import MobileNum from "./MobileNum";
 import styles from "../styles/form.module.css";
+import { formOutPutHandler } from "../func/formOutPutHandler";
 
-const Form = ({ formData }) => {
+const Form = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const name = e.target[1].value;
-
-    const food = [
-      e.target[3].value === "" ? 0 : Number.parseInt(e.target[3].value),
-      e.target[4].value === "" ? 0 : Number.parseInt(e.target[4].value),
-      e.target[5].value === "" ? 0 : Number.parseInt(e.target[5].value),
-      e.target[6].value === "" ? 0 : Number.parseInt(e.target[6].value),
-    ];
-
-    const address = e.target[7].value;
-
-    const order = {
-      address,
-      food,
-      name,
-    };
-
-    const body = JSON.stringify(order);
+    const order = formOutPutHandler(e);
 
     try {
       const res = await fetch("http://localhost:8000/form", {
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
         method: "POST",
-        body,
       });
 
-      const data = await res.json();
-
-      console.log(data);
-
-      formData(data);
+      await res.json();
     } catch (error) {
       console.log(error);
     }

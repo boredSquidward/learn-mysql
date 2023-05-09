@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import { getPrices } from "./database/db.js";
+import { getPrices, createOrder } from "./database/db.js";
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.get("/prices", async (req, res) => {
 app.post("/form", (req, res) => {
   console.log(req.body);
 
-  res.status(200).json({ status: "success", data: req.body });
+  res.status(201).json({ status: "success", data: req.body });
 });
 
 app.listen(port, () => {

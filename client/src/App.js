@@ -6,13 +6,11 @@ import styles from "./app.module.css";
 import Form from "./components/Form";
 
 function App() {
-  const [data, setData] = React.useState([]);
-
   return (
     <div className={styles.container}>
-      <Form formData={(data) => setData(data)} />
+      <Form />
       <Search />
-      <Table data={data} />
+      <Table />
     </div>
   );
 }
