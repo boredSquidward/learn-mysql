@@ -1,15 +1,15 @@
 import React from "react";
 
-import styles from "../styles/name.module.css";
-
 const Name = () => {
   return (
-    <div className={styles.container}>
-      <label>
-        Name:
-        <input type="text" name="name" />
-      </label>
-    </div>
+    <input
+      type="text"
+      name="name"
+      placeholder="Name"
+      style={{ width: "100%" }}
+      maxLength={50}
+      required
+    />
   );
 };
 

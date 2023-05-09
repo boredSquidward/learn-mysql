@@ -1,6 +1,7 @@
 import mysql from "mysql2";
 import dotenv from "dotenv";
-dotenv.config({ path: "../../.env" });
+
+dotenv.config();
 
 const pool = mysql
   .createPool({
@@ -11,32 +12,8 @@ const pool = mysql
   })
   .promise();
 
-export const fetchAllUsersFromUsersTable = async () => {
-  const [rows] = await pool.query("SELECT * FROM users");
+export const getPrices = async () => {
+  const [rows] = await pool.query("SELECT * FROM foodPrices");
 
   return rows;
 };
-
-export const fetchUserFromUsersTable = async (id) => {
-  const [result] = await pool.query("SELECT * FROM USERS WHERE Id = ?", [id]);
-
-  return result[0];
-};
-
-export const addUserToUsersTable = async (username, date) => {
-  const result = await pool.query(
-    "INSERT INTO users (Username, EnterDate) VALUES (?, ?)",
-    [username, date]
-  );
-
-  return result;
-};
-
-export const deleteUserFromUsersTable = async (id) => {
-  const result = await pool.query("DELETE FROM users WHERE Id = ?", [id]);
-
-  return result;
-};
-
-console.log(await fetchAllUsersFromUsersTable());
-pool.end();

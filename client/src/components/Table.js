@@ -10,6 +10,7 @@ const Table = ({ data }) => {
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Orders</th>
             <th>Date</th>
             <th>Delete</th>
             <th>Edit</th>
@@ -17,7 +18,7 @@ const Table = ({ data }) => {
         </thead>
         <tbody>
           <tr>
-            <td colSpan={5} style={{ textAlign: "center" }}>
+            <td colSpan={6} style={{ textAlign: "center" }}>
               No Data
             </td>
           </tr>
