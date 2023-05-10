@@ -4,13 +4,19 @@ import styles from "../styles/foods.module.css";
 import FoodItem from "./FoodItem";
 
 const Foods = () => {
+  const [priceArr] = React.useState([]);
   const [totalPrice, setTotalPrice] = React.useState(0);
   const [foods, setFoods] = React.useState(undefined);
 
-  const totalPriceHandler = (prices) => {
-    console.log(prices);
-    console.log(totalPrice);
-    setTotalPrice((prev) => prev + prices);
+  const totalPriceHandler = (id, price) => {
+    priceArr[id - 1] = price;
+
+    const total = priceArr.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+
+    setTotalPrice(total);
   };
 
   React.useEffect(() => {
@@ -23,23 +29,27 @@ const Foods = () => {
     getPrices();
   }, []);
 
-  // React.useEffect(() => {
-  //   console.log(totalPrice);
-  // }, [totalPrice]);
+  React.useEffect(() => {
+    console.log(totalPrice);
+    console.log(priceArr);
+  }, [totalPrice, priceArr]);
+
+  const itemDisplayer = () =>
+    foods.map(
+      (item) =>
+        item.availability === 1 && (
+          <FoodItem
+            data={item}
+            key={item.id}
+            totalPriceHandler={totalPriceHandler}
+          />
+        )
+    );
 
   return (
     <div className={styles.container}>
       {foods ? (
-        foods.map(
-          (item) =>
-            item.availability === 1 && (
-              <FoodItem
-                data={item}
-                key={item.id}
-                totalPriceHandler={totalPriceHandler}
-              />
-            )
-        )
+        itemDisplayer()
       ) : (
         <h5 style={{ textAlign: "center" }}>OUT OF ORDER</h5>
       )}

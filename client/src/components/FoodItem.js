@@ -3,10 +3,11 @@ import React from "react";
 const FoodItem = ({ data, totalPriceHandler }) => {
   const addPriceHandler = ({ target }) => {
     const value = +target.value;
+    const id = target.id;
 
     const multiply = value * Number.parseFloat(data.price);
 
-    totalPriceHandler(multiply);
+    totalPriceHandler(id, +multiply.toFixed(2));
   };
 
   return (
@@ -18,9 +19,11 @@ const FoodItem = ({ data, totalPriceHandler }) => {
       <input
         type="number"
         placeholder="0"
+        name={data.foodName}
         style={{ width: "40px" }}
         min={0}
         onChange={addPriceHandler}
+        id={data.id}
       />
     </label>
   );
