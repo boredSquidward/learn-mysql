@@ -12,7 +12,7 @@ const Table = ({ realTimeData }) => {
 
       const { data } = await res.json();
 
-      setDbData(data);
+      setDbData(data.reverse());
     };
 
     getOrdersFromDB();
