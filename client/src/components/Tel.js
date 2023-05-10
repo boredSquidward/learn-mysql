@@ -1,10 +1,10 @@
 import React from "react";
 
-const MobileNum = () => {
+const Tel = () => {
   return (
     <input
       maxLength={10}
-      placeholder="Mobile Number"
+      placeholder="Tel"
       type="tel"
       style={{ width: "100%", margin: "5px 0" }}
       required
@@ -12,4 +12,4 @@ const MobileNum = () => {
   );
 };
 
-export default MobileNum;
+export default Tel;

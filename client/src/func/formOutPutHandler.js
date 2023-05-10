@@ -1,28 +1,29 @@
-// TODO: keep working on foods array so you can send a readable content to the client
-// something like 2 tacos, 1 hotdog, .etc
-// store the data which is comming from the form on database
-// also, working on total price is vital
+export const formOutPutHandler = ({ target }) => {
+  const name = target[1].value;
+  const tel = target[2].value;
 
-export const formOutPutHandler = (e) => {
-  const name = e.target[1].value;
-  const mobile = e.target[2].value;
+  const listOfAvailableFoods = () => {
+    let listOfFoods = "";
 
-  const foods = [
-    e.target[3].value === "" ? 0 : Number.parseInt(e.target[3].value),
-    e.target[4].value === "" ? 0 : Number.parseInt(e.target[4].value),
-    e.target[5].value === "" ? 0 : Number.parseInt(e.target[5].value),
-    e.target[6].value === "" ? 0 : Number.parseInt(e.target[6].value),
-  ];
+    for (let i = 3; i <= target.length - 3; i++) {
+      if (target[i].value === "" || target[i].value === "0") continue;
 
-  console.log(e);
-  console.log(e.target.length);
+      listOfFoods +=
+        Number.parseInt(target[i].value) + " " + target[i].name + ", ";
+    }
 
-  const address = e.target[e.target.length - 2].value;
+    return listOfFoods;
+  };
+
+  const orderDate = new Date().toISOString().replace("Z", "+00:00");
+
+  const address = target[target.length - 2].value;
 
   return {
-    address,
-    mobile,
-    foods,
     name,
+    orders: listOfAvailableFoods(),
+    orderDate,
+    address,
+    tel,
   };
 };

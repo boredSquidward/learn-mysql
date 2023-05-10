@@ -3,15 +3,22 @@ import React from "react";
 import Address from "./Address";
 import Name from "./Name";
 import Foods from "./Foods";
-import MobileNum from "./MobileNum";
+import Tel from "./Tel";
 import styles from "../styles/form.module.css";
 import { formOutPutHandler } from "../func/formOutPutHandler";
 
 const Form = () => {
+  const [totalCost, setTotalCost] = React.useState(0);
+
+  const totalPriceHandelr = (number) => {
+    setTotalCost(number);
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const order = formOutPutHandler(e);
+    let order = formOutPutHandler(e);
+    order["price"] = totalCost;
 
     try {
       const res = await fetch("http://localhost:8000/form", {
@@ -31,8 +38,11 @@ const Form = () => {
       <fieldset style={{ padding: "10px" }}>
         <legend>Order Your Mill</legend>
         <Name />
-        <MobileNum />
-        <Foods />
+        <Tel />
+        <Foods totalPrice={totalPriceHandelr} />
+        <strong>
+          <code style={{ margin: "10px 0" }}>Total: ${totalCost}</code>
+        </strong>
         <Address />
         <input type="submit" style={{ display: "block", width: "100%" }} />
       </fieldset>
