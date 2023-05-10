@@ -15,13 +15,13 @@ const Foods = ({ totalPrice }) => {
       0
     );
 
-    totalPrice(total);
+    totalPrice(total.toFixed(2));
   };
 
   React.useEffect(() => {
     const getPrices = async () => {
       const res = await fetch("http://localhost:8000/prices");
-      const {data} = await res.json();
+      const { data } = await res.json();
       setFoods(data);
     };
 

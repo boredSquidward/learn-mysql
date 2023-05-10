@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../styles/table.module.css";
 import TableRow from "./TableRow";
 
-const Table = () => {
+const Table = ({ realTimeData }) => {
   const [dbData, setDbData] = React.useState(undefined);
 
   React.useEffect(() => {
@@ -18,9 +18,10 @@ const Table = () => {
     getOrdersFromDB();
   }, []);
 
-  React.useEffect(() => {
-    console.log(dbData);
-  }, [dbData]);
+  const firstCondition = () => !dbData && !realTimeData;
+
+  const secondCondition = () =>
+    dbData?.length === 0 && realTimeData?.length === 0;
 
   return (
     <div className={styles.container}>
@@ -38,15 +39,18 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {dbData ? (
-            dbData.map((item) => <TableRow data={item} key={item.id} />)
-          ) : (
-            <tr>
-              <td colSpan={7} style={{ textAlign: "center" }}>
-                No Data
-              </td>
-            </tr>
-          )}
+          {firstCondition() ||
+            (secondCondition() && (
+              <tr>
+                <td colSpan={8} style={{ textAlign: "center" }}>
+                  No Data
+                </td>
+              </tr>
+            ))}
+          {realTimeData &&
+            realTimeData.map((item) => <TableRow data={item} key={item.id} />)}
+          {dbData &&
+            dbData.map((item) => <TableRow data={item} key={item.id} />)}
         </tbody>
       </table>
     </div>

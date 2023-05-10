@@ -32,19 +32,19 @@ app.get("/prices", async (req, res) => {
 });
 
 app.post("/form", async (req, res) => {
-  const data = req.body;
+  let body = req.body;
 
-  const [result] = await createOrder(data);
+  const [result] = await createOrder(body);
 
-  res.status(201).json({ status: "success", data: result });
+  body["id"] = result.insertId;
+
+  res.status(201).json({ status: "success", data: body });
 });
 
 app.get("/delete/:id", async (req, res) => {
   const id = +req.params.id;
 
   const result = await deleteOrder(id);
-
-  console.log(result);
 
   res.status(200).json({ status: "success", data: result });
 });

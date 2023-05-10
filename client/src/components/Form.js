@@ -7,8 +7,9 @@ import Tel from "./Tel";
 import styles from "../styles/form.module.css";
 import { formOutPutHandler } from "../func/formOutPutHandler";
 
-const Form = () => {
+const Form = ({ dataHandler }) => {
   const [totalCost, setTotalCost] = React.useState(0);
+  const [realTimeData, setRealTimeData] = React.useState([]);
 
   const totalPriceHandelr = (number) => {
     setTotalCost(number);
@@ -27,11 +28,17 @@ const Form = () => {
         method: "POST",
       });
 
-      await res.json();
+      const { data } = await res.json();
+
+      setRealTimeData((prev) => [...prev, data]);
     } catch (error) {
       console.log(error);
     }
   };
+
+  React.useEffect(() => {
+    dataHandler(realTimeData);
+  }, [realTimeData, dataHandler]);
 
   return (
     <form onSubmit={submitHandler} className={styles.container}>
